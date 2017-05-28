@@ -2,12 +2,193 @@
     <header>
         <div class="container">
             <div class="intro-text">
-                <div class="intro-lead-in">Welcome To</div>
-                <div class="intro-heading" style="color:#fed136;">Mongo News Scraper - Reddit Edition</div>
+                <div class="intro-lead-in">You've Got News!</div>
+                <div class="intro-heading" style="color:#fed136;">We Found {{this.found}} News Articles!</div>
    
             </div>
         </div>
     </header>
 
-    <!-- Services Section -->
+  <!-- Contact Section -->
+
+
+
+    <section id="contact">
+         
+        <div class="container">
+            <span id="recFound" style="color:#fff;">Results Found:&nbsp;{{this.recordsFound}}</span><br>
+
+            <span id="resCount" style="color:#fff;">Showing Results:&nbsp;</span><br>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                 
+      
+                </div>
+            </div>
+
+
+       
+
+
+              {{#each result}}
+
+            <div class="row" >
+                <div class="col-md-12">
+                   
+
+                  
+
+                <div class="col-md-12 result" id="{{@index}}" style="margin-bottom:30px;border: 1px solid #666;padding: 6px 6px 6px 6px;" hidden>
+              
+           
+           
+
+            <div class="col-md-9" style="background-color:#333;width:100%;border: 1px solid">
+               <a href="{{this.link}}" target="_blank"><span><h1>{{this.title}}</h1></span></a>
+               <form action="/delete/{{this._id}}"  method="get" style="margin-bottom:10px;"><input type="hidden" name="deleteRec" value="{{this._id}}"
+               ><button id="{{this._id}}" name="{{this._id}}" type="submit" onclick="$(this).parent(".result").remove();" class="btn btn-danger btn-xs">Delete Article</button></form>
+
+            
+              <span style="color:greenyellow;">Article Number:&nbsp;&nbsp;
+              <a href="/articles/{{this._id}}">{{this._id}}</a></span><br>
+
+   
+
+             
+              <form action="/articles/new/{{this._id}}" method="post" name="note" style="margin-top: 10px;">
+
+  <div class="form-group">
+
+  <textarea style="height:80px;padding:5px;" class="form-control comment" rows="5" name="notes" placeholder="Notes"></textarea>
+
+        <button style="margin-top:10px;" id="{{this._id}}" type="submit" class="btn btn-xs btn-success notes">Submit</button>
+       
+      
+        
+        </form>
+
+        {{#if this.post}}
+        <br><br>
+      <div style="margin-left:50px;"> <span style="color:greenyellow;"><u>Notes</u></span></div>
+       
+  {{#each this.post}}
+  
+      <div>
+          <form action="/delete/note/{{this._id}}"  method="get" style="margin-bottom:10px;">
+          <input type="hidden" name="deleteRec" value="{{this._id}}"
+               >
+          <button style="margin-left:10px;height:20px;width:20px;padding:0px 0px 0px 0px;margin-top:10px;" id="{{this._id}} type="submit" class="btn btn-danger btn-xs">
+              <span>x</span>
+              </button>
+              <span style="color:#fff;margin-left:20px;">{{this.notes}}</span>
+              </form>
+              </div>
+      
+  {{/each}}
+
+  {{/if}}
+
+        </div>
+               
+
+
+               </div>
+               </div>
+             
+                        {{/each}}
+                 
+                </div>
+            </div>
+        </div>
+
+        <div id="page"><button id="pgBut" onclick="count()">More</button></div>
+
+
+       
+
+<script>
+
+
+  
+var page = 0;
+
+
+var hideMore = $("#recFound").text();
+hideMore = parseInt(hideMore.slice(-2));
+
+console.log(hideMore);
+
+if (hideMore === 0) {
+
+    $("#resCount").hide();
+    $("#page").hide();
+}
+
+function count() {
+
+    var itmLim = page + 10;
+
+    
+
+    
+
+console.log(itmLim);
+console.log(page);
+
+    for (i=page; i<itmLim; i++){
+
+        hideItm = i - 10;
+
+       $("#"+hideItm+".result").hide();
+
+    $("#"+i+".result").fadeIn(1000);
+}
+if (itmLim >= hideMore) {
+
+       itmLim = hideMore;
+
+        $("#page").hide();
+ 
+ } 
+$("#resCount").text("Showing Results:    "+page+" - "+itmLim);
+
+
+
+    $('html, body').animate({ scrollTop: 0 }, 'fast');
+    page = page + 10;
+
+    if (page > hideMore) {
+
+        page = hideMore - 10;
+    }
+}
+
+
+    
+    //page(page);                          
+                            
+  function start() {
+       for (i=0;i<10;i++) {
+
+           $("#resCount").text("Showing Results:    1 - 10");
+
+       $("#"+i+".result").fadeIn(3000);
+   } 
+     $('html, body').animate({ scrollTop: 0 }, 'fast');
+     page = page + 10;
+  }                        
+start();
+</script>
+
+ <script>
+
+$(document).ready(function () {
+
+    $('#myModal').modal('{{this.show}}');
+   $('#found').text('{{this.found}}');
+
+
+       </script>  
+
+    </section>
   
