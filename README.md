@@ -18,5 +18,5 @@ body-parser<br>
 cheerio<br>
 request<br>
 <br>
-![MongooseNews](https://github.com/bggitacc/mongoosenews/blob/master/public/img/about.jpg)
+
 <br>
