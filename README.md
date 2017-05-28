@@ -18,6 +18,5 @@ body-parser<br>
 cheerio<br>
 request<br>
 <br>
-![Read Me](https://github.com/bggitacc/mongoosenews/blob/master/public/img/about.jpg "Mongoose News")
+![MongooseNews](https://github.com/bggitacc/mongoosenews/blob/master/public/img/about.jpg)
 <br>
-[link to Google!](http://google.com)
